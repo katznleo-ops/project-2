@@ -9,3 +9,33 @@ execute:
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
 ```
+
+```{r}
+# Create the visualization
+ggplot(data = mpg, aes(x = displ, y = hwy, color = class)) +
+  # Add points with some jitter to prevent overlapping and adjust transparency
+  geom_jitter(size = 3, alpha = 0.7, width = 0.1) +
+  # Add a global trend line showing the negative correlation
+  geom_smooth(aes(group = 1), method = "lm", color = "black", 
+              linetype = "dashed", se = FALSE, alpha = 0.5) +
+  # Use a clean, modern theme
+  theme_minimal(base_size = 14) +
+  # Customize colors using a nice palette
+  scale_color_brewer(palette = "Set2") +
+  # Add meaningful titles and labels
+  labs(
+    title = "Engine Size vs. Highway Fuel Efficiency",
+    subtitle = "Larger engines generally yield lower highway MPG across vehicle classes",
+    x = "Engine Displacement (Liters)",
+    y = "Highway Miles per Gallon (MPG)",
+    color = "Vehicle Class",
+    caption = "Data Source: EPA (mpg dataset)"
+  ) +
+  # Fine-tune theme adjustments
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(color = "gray40", margin = margin(b = 10)),
+    legend.position = "right",
+    panel.grid.minor = element_blank()
+  )
+```
