@@ -2,5 +2,10 @@
 title: "Quarto 2"
 author: "Leo Katz"
 format: html
+execute:
+    echo: false
 ---
 
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+```
